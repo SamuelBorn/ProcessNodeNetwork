@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.views.generic import TemplateView
+from ProcessNodeNetworkPlan.View.MainView import MainView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name="main.html"), name="main")
+    path('', MainView.as_view(), name="main")
 ]

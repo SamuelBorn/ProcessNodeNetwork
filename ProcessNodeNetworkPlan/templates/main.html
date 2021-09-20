@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
     <div class="content-section mt-4">
@@ -24,8 +25,17 @@
             </tr>
             </tbody>
         </table>
-        <button type="button" class="btn btn-light bg-lightlight w-100 dark" onclick="add_table_row()">Reihe Hinzufügen</button>
+        <button type="button" class="btn bg-white w-100 darkdark" onclick="add_table_row()">
+            Weiteren Prozess hinzufügen
+        </button>
     </div>
 
-    <button type="button" class="btn btn-dark bg-darkdark w-100">Berechnung beginnen</button>
+    <button id="start_calculation_button" type="button" class="btn btn-dark bg-darkdark w-100 lightlight">
+        Berechnung beginnen
+    </button>
+
+    <div id="results"></div>
+
+    <script src={% static "add_table_row.js" %}></script>
+    <script src={% static "start_calculation.js" %}></script>
 {% endblock %}
