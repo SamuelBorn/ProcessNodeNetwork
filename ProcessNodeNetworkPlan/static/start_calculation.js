@@ -5,8 +5,11 @@ $("#start_calculation_button").click(function () {
         data: {
             row_json: JSON.stringify(table_to_json())
         },
-        success: function (content) {
-
+        success: function (response) {
+            console.log(response.data);
+        },
+        error: function (response) {
+            alert("Fehler in den Eingabedaten");
         }
     })
 })
@@ -25,5 +28,4 @@ function table_to_json() {
     var json_obj = {};
     json_obj.rows = rows;
     return json_obj;
-    // alert(JSON.stringify(myObj));
 }

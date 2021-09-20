@@ -61,3 +61,24 @@ th, td {
     width: auto !important;
     width: 720px;
 }
+
+.tooltip-inner {
+  background-color: var(--darkdark) !important; /* Set box color to red */
+  color: white !important; /* Set text color to black */
+}
+
+.tooltip.bs-tooltip-top .tooltip-arrow::before {
+  border-top-color: var(--darkdark); /* Set arrow color to red */
+}
+
+.tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+  border-bottom-color: var(--darkdark); /* Set arrow color to red */
+}
+
+.tooltip.bs-tooltip-start .tooltip-arrow::before {
+  border-left-color: var(--darkdark); /* Set arrow color to red */
+}
+
+.tooltip.bs-tooltip-end .tooltip-arrow::before {
+  border-right-color: var(--darkdark); /* Set arrow color to red */
+}
