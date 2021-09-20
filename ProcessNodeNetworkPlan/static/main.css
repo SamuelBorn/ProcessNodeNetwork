@@ -1,0 +1,57 @@
+:root {
+    --darkdark: #2E3440;
+    --dark: #4C566A;
+    --light: #D8DEE9;
+    --lightlight: #ECEFF4;
+}
+
+.content-section {
+    background: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.bg-darkdark {
+    background: var(--darkdark);
+}
+
+.bg-dark {
+    background: var(--dark);
+}
+
+.bg-light {
+    background: var(--light);
+}
+
+.bg-lightlight {
+    background: var(--lightlight);
+}
+
+.bg-white {
+    background: white;
+}
+
+.darkdark {
+    color: var(--darkdark);
+}
+
+.dark {
+    color: var(--dark);
+}
+
+.light {
+    color: var(--light);
+}
+
+.lightlight {
+    color: var(--lightlight);
+}
+
+body {
+    background: var(--lightlight);
+}
+
+th, td {
+    color: var(--dark)
+}
