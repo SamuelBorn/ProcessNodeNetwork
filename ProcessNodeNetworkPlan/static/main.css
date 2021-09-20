@@ -5,6 +5,10 @@
     --lightlight: #ECEFF4;
 }
 
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
 .content-section {
     background: #FFFFFF;
     padding: 10px 20px;
@@ -63,22 +67,22 @@ th, td {
 }
 
 .tooltip-inner {
-  background-color: var(--darkdark) !important; /* Set box color to red */
-  color: white !important; /* Set text color to black */
+    background-color: var(--darkdark) !important; /* Set box color to red */
+    color: white !important; /* Set text color to black */
 }
 
 .tooltip.bs-tooltip-top .tooltip-arrow::before {
-  border-top-color: var(--darkdark); /* Set arrow color to red */
+    border-top-color: var(--darkdark); /* Set arrow color to red */
 }
 
 .tooltip.bs-tooltip-bottom .tooltip-arrow::before {
-  border-bottom-color: var(--darkdark); /* Set arrow color to red */
+    border-bottom-color: var(--darkdark); /* Set arrow color to red */
 }
 
 .tooltip.bs-tooltip-start .tooltip-arrow::before {
-  border-left-color: var(--darkdark); /* Set arrow color to red */
+    border-left-color: var(--darkdark); /* Set arrow color to red */
 }
 
 .tooltip.bs-tooltip-end .tooltip-arrow::before {
-  border-right-color: var(--darkdark); /* Set arrow color to red */
+    border-right-color: var(--darkdark); /* Set arrow color to red */
 }

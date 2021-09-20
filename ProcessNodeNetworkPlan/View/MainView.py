@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 
-from ProcessNodeNetworkPlan.logic.Graph import Graph
+from ProcessNodeNetworkPlan.logic.Graph import build_graph_from_json
 
 
 class MainView(View):
@@ -17,7 +17,7 @@ class MainView(View):
         cleaned_rows_json = self.clean_json_graph(rows_json, request)
         if not cleaned_rows_json[0]:  # cleaned rows [0] says if op was successful
             return JsonResponse({"err_mes": cleaned_rows_json[1]}, status=400)
-        print(cleaned_rows_json)
+        build_graph_from_json(cleaned_rows_json[1])
         return render(request, "results.html")
 
     def clean_json_graph(self, rows_json, request):
@@ -43,10 +43,13 @@ class MainView(View):
         my_list = []
         for predecessor in row.get(name).split(','):
             if predecessor.strip() == '':
-                my_list.append(Graph.GraphJsonEnum.not_used)
+                my_list.append(None)
             else:
                 x = float(predecessor)
-                if not x.is_integer():
-                    raise ValueError()
+                if name == "Vorgänger":
+                    if not x.is_integer():
+                        raise ValueError()
+                    x = int(x)
                 my_list.append(x)
+
         return my_list
