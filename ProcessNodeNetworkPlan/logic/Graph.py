@@ -40,13 +40,13 @@ class Graph:
     def add_min_edge(self, from_pid, to_pid, time_constraint):
         if from_pid not in self.get_pids() or to_pid not in self.get_pids():
             raise Exception(f"PID {from_pid} or {to_pid} NOT IN GRAPH")
-        self.edges.append(Edge(from_pid, to_pid, time_constraint))
+        self.edges.append(Edge(self.get_process(from_pid), self.get_process(to_pid), time_constraint))
 
     def add_max_edge(self, from_pid, to_pid, time_constraint):
         if from_pid not in self.get_pids() or to_pid not in self.get_pids():
             raise Exception("PID NOT IN GRAPH")
         self.edges.append(
-            Edge(to_pid, from_pid,
+            Edge(self.get_process(to_pid), self.get_process(from_pid),
                  -time_constraint - self.get_process(to_pid).duration - self.get_process(from_pid).duration))
 
     def __str__(self):

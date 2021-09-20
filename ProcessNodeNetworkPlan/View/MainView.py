@@ -33,6 +33,7 @@ class MainView(View):
             if len(predecessors) != len(min_times) or len(min_times) != len(max_times):
                 return False, f"Ungleiche Anzahl an Argumenten in Zeile {row.get('#')}"
 
+            row["#"] = int(row["#"])
             row["Vorgänger"] = predecessors
             row["Mindestabstand"] = min_times
             row["Maximalabstand"] = max_times
@@ -42,7 +43,7 @@ class MainView(View):
     def csv_to_list(self, row, name):
         my_list = []
         for predecessor in row.get(name).split(','):
-            if predecessor.strip() == '':
+            if predecessor.strip() == '' or predecessor.strip() == '-':
                 my_list.append(None)
             else:
                 x = float(predecessor)
@@ -51,5 +52,4 @@ class MainView(View):
                         raise ValueError()
                     x = int(x)
                 my_list.append(x)
-
         return my_list
