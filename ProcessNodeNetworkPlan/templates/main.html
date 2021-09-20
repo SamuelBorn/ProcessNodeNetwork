@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="content-section mt-4">
-        <table class="table">
+        <table id="process_input_table" class="table">
             <thead>
             <tr>
                 <th scope="col" style="width: 5%">#</th>
@@ -16,15 +16,15 @@
             <tbody>
             <tr>
                 <th scope="row">1</th>
-                <td contenteditable="true">Mark</td>
-                <td contenteditable="true">Otto</td>
-                <td contenteditable="true">@mdo</td>
-                <td contenteditable="true">Otto</td>
-                <td contenteditable="true">@mdo</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
             </tr>
             </tbody>
         </table>
-        <button type="button" class="btn btn-light bg-lightlight w-100 dark">Reihe Hinzufügen</button>
+        <button type="button" class="btn btn-light bg-lightlight w-100 dark" onclick="add_table_row()">Reihe Hinzufügen</button>
     </div>
 
     <button type="button" class="btn btn-dark bg-darkdark w-100">Berechnung beginnen</button>
