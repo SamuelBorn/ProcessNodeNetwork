@@ -55,3 +55,9 @@ body {
 th, td {
     color: var(--dark)
 }
+
+.min-width {
+    min-width: 720px !important;
+    width: auto !important;
+    width: 720px;
+}
