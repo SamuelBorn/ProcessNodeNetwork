@@ -16,14 +16,26 @@ class MainView(View):
             return render(request, "main.html")
 
         rows_json = json.loads(request.GET.get("row_json"))
-        cleaned_rows_json = self.clean_json_graph(rows_json)
-        if not cleaned_rows_json[0]:  # cleaned rows [0] says if op was successful
-            return JsonResponse({"err_mes": cleaned_rows_json[1]}, status=400)
-        graph = build_graph_from_json(cleaned_rows_json[1])
+        success, cleaned_rows_json = self.clean_json_graph(rows_json)
+        if not success:  # cleaned rows [0] says if op was successful
+            return JsonResponse({"err_mes": cleaned_rows_json}, status=400)
+        if not self.check_predecessor_indices(cleaned_rows_json)[0]:
+            return JsonResponse({"err_mes": self.check_predecessor_indices(cleaned_rows_json)[1]}, status=400)
+        graph = build_graph_from_json(cleaned_rows_json)
         computer = ComputeMinMaxTime(graph)
         GraphImageCreator.create_image(graph)
         context = {"results": computer.compute_sxz_and_fxz(), "image": GraphImageCreator.get_image_base64(graph)}
         return render(request, "results.html", context)
+
+    def check_predecessor_indices(self, cleaned_rows_json):
+        indices = []
+        for row in cleaned_rows_json.get("rows"):
+            indices.append(row.get("#"))
+        for row in cleaned_rows_json.get("rows"):
+            for predecessor in row.get("Vorgänger"):
+                if predecessor not in indices and predecessor is not None:
+                    return False, f"Prozess mit Index {predecessor} in Zeile {row.get('#')} ist nicht vorhanden"
+        return True, True
 
     def clean_json_graph(self, rows_json):
         for row in rows_json.get("rows"):
