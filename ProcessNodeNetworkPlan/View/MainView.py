@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 
+from ProcessNodeNetworkPlan.logic.ComputeMinMaxTime import ComputeMinMaxTime
 from ProcessNodeNetworkPlan.logic.Graph import build_graph_from_json
 
 
@@ -17,7 +18,9 @@ class MainView(View):
         cleaned_rows_json = self.clean_json_graph(rows_json)
         if not cleaned_rows_json[0]:  # cleaned rows [0] says if op was successful
             return JsonResponse({"err_mes": cleaned_rows_json[1]}, status=400)
-        build_graph_from_json(cleaned_rows_json[1])
+        graph = build_graph_from_json(cleaned_rows_json[1])
+        computer = ComputeMinMaxTime(graph)
+        computer.compute_fxz()
         return render(request, "results.html")
 
     def clean_json_graph(self, rows_json):

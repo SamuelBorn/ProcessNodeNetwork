@@ -27,7 +27,16 @@ def build_graph_from_json(json):
     if len(g.get_end_processes()) > 1:
         g.add_process(g.get_processes_count() + 1, 0)
         for end_process in g.get_end_processes():
-            g.add_min_edge(end_process, g.get_processes_count(), 0)
+            g.add_min_edge(g.get_processes_count(), end_process, 0)
+
+    # add pseudo start if multiple processes could be the first one
+    if len(g.get_start_processes()) > 1:
+        # is lowest id
+        g.add_process(0, 0)
+        for start_process in g.get_start_processes():
+            g.add_min_edge(start_process, g.get_processes_count(), 0)
+
+    return g
 
 
 class Graph:
@@ -40,6 +49,9 @@ class Graph:
 
     def get_pids(self):
         return [process.pid for process in self.processes]
+
+    def get_processes(self):
+        return self.processes
 
     def get_process(self, pid):
         for process in self.processes:
@@ -64,6 +76,18 @@ class Graph:
             Edge(self.get_process(to_pid), self.get_process(from_pid),
                  -time_constraint - self.get_process(to_pid).duration - self.get_process(from_pid).duration))
 
+    def get_edge(self, from_process, to_process):
+        for edge in self.edges:
+            if edge.from_vertex == from_process and edge.to_vertex == to_process:
+                return edge
+        raise Exception(f"EDGE FROM {from_process} to {to_process} NOT IN GRAPH")
+
+    def get_start_process(self):
+        if len(self.get_start_processes()) > 1:
+            raise Exception(f"THERE ARE {self.get_start_processes()} STARTS")
+        else:
+            return self.get_start_processes()[0]
+
     def get_start_processes(self):
         start_processes = []
         for process in self.processes:
@@ -75,7 +99,7 @@ class Graph:
         # Gets all processes that dont have a predecessor
         start_processes = []
         for process in self.processes:
-            if len(self.get_immediate_successor(process)) == 0:
+            if len(self.get_immediate_successors(process)) == 0:
                 start_processes.append(process)
         return start_processes
 
@@ -88,7 +112,7 @@ class Graph:
                 predecessors.append(edge.from_vertex)
         return set(predecessors)
 
-    def get_immediate_successor(self, process):
+    def get_immediate_successors(self, process):
         # NACHFOLGER
         # gets all immediate predecessors, doesnt check if those predecessors has predecessors themself
         successors = []
