@@ -84,7 +84,7 @@ class Graph:
 
     def get_start_process(self):
         if len(self.get_start_processes()) > 1:
-            raise Exception(f"THERE ARE {self.get_start_processes()} STARTS")
+            raise Exception(f"THERE ARE MULTIPLE ({self.get_start_processes()}) STARTS")
         else:
             return self.get_start_processes()[0]
 
@@ -94,6 +94,12 @@ class Graph:
             if len(self.get_immediate_predecessors(process)) == 0:
                 start_processes.append(process)
         return start_processes
+
+    def get_end_process(self):
+        if len(self.get_end_processes()) > 1:
+            raise Exception(f"THERE ARE MULTIPLE ({self.get_start_processes()}) ENDS")
+        else:
+            return self.get_end_processes()[0]
 
     def get_end_processes(self):
         # Gets all processes that dont have a predecessor

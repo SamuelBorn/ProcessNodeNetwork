@@ -20,7 +20,7 @@ class MainView(View):
             return JsonResponse({"err_mes": cleaned_rows_json[1]}, status=400)
         graph = build_graph_from_json(cleaned_rows_json[1])
         computer = ComputeMinMaxTime(graph)
-        computer.compute_fxz()
+        print(computer.compute_sxz_and_fxz())
         return render(request, "results.html")
 
     def clean_json_graph(self, rows_json):

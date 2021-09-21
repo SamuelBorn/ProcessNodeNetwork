@@ -11,7 +11,7 @@ class ResultContainerList:
         self.results = [ResultContainer(process) for process in processes]
 
     def __str__(self):
-        ret = "DIE RESULTS SIND:\n"
+        ret = "\n"
         for result in self.results:
             ret += f"{result}\n"
         return ret + "\n"
