@@ -5,8 +5,9 @@ $("#start_calculation_button").click(function () {
         data: {
             row_json: JSON.stringify(table_to_json())
         },
-        success: function (response) {
+        success: function (content) {
             $("#ajax_alerts").hide()
+            $("#results_div").html(content)
         },
         error: function (xhr) {
             let content_div = $("#ajax_alerts")

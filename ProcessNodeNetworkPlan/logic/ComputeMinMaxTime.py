@@ -16,7 +16,7 @@ class ComputeMinMaxTime:
         self.compute_sxz()
         return self.results
 
-    # VORLESUNG SEITE 29
+    # VORLESUNG KAPITEL 4 SEITE 29
     # CAN ONLY BE CALLED WHEN COMPUTE FXZ WAS CALLED
     def compute_sxz(self):
         q = []
@@ -41,7 +41,7 @@ class ComputeMinMaxTime:
             else:
                 finished = True
 
-    # VORLESUNG SEITE 29
+    # VORLESUNG KAPITEL 4 SEITE 29
     def compute_fxz(self):
         q = []
         for process in self.graph.get_processes():

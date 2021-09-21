@@ -1,0 +1,33 @@
+<div class="content-section mt-4">
+    <table class="table">
+        <thead>
+        <tr>
+            {#                @formatter:off#}
+            <th scope="col" style="" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Die ID des Prozesses">#</th>
+            <th scope="col" style="" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Frühestmöglicher Anfangszeitpunkt eines Prozesses">FAZ</th>
+            <th scope="col" style="" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Frühestmöglicher Endzeitpunkt eines Prozesses">FEZ</th>
+            <th scope="col" style="" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Spätestmöglicher Anfangszeitpunkt eines Prozesses">SEZ</th>
+            <th scope="col" style="" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Spätestmöglicher Endzeitpunkt eines Prozesses">SAZ</th>
+            {#                @formatter:on#}
+        </tr>
+        </thead>
+        <tbody>
+        {% for result in results.results %}
+            <tr>
+                <td>{{ result.process.pid }}</td>
+                <td>{{ result.FAZ }}</td>
+                <td>{{ result.FEZ }}</td>
+                <td>{{ result.SEZ }}</td>
+                <td>{{ result.SAZ }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
