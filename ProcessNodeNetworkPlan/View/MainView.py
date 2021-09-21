@@ -7,6 +7,7 @@ from django.http import HttpResponse, JsonResponse
 
 from ProcessNodeNetworkPlan.logic.ComputeMinMaxTime import ComputeMinMaxTime
 from ProcessNodeNetworkPlan.logic.Graph import build_graph_from_json
+from ProcessNodeNetworkPlan.media_handler import GraphImageCreator
 
 
 class MainView(View):
@@ -20,7 +21,8 @@ class MainView(View):
             return JsonResponse({"err_mes": cleaned_rows_json[1]}, status=400)
         graph = build_graph_from_json(cleaned_rows_json[1])
         computer = ComputeMinMaxTime(graph)
-        context = {"results": computer.compute_sxz_and_fxz()}
+        GraphImageCreator.create_image(graph)
+        context = {"results": computer.compute_sxz_and_fxz(), "image": GraphImageCreator.get_image_base64(graph)}
         return render(request, "results.html", context)
 
     def clean_json_graph(self, rows_json):

@@ -53,6 +53,9 @@ class Graph:
     def get_processes(self):
         return self.processes
 
+    def get_edges(self):
+        return self.edges
+
     def get_process(self, pid):
         for process in self.processes:
             if process.pid == pid:
