@@ -25,9 +25,10 @@ def build_graph_from_json(json):
 
     # add pseudo end if multiple processes could be the last one
     if len(g.get_end_processes()) > 1:
-        g.add_process(g.get_processes_count()+1, 0)
+        g.add_process(g.get_processes_count() + 1, 0)
         for end_process in g.get_end_processes():
             g.add_min_edge(end_process, g.get_processes_count(), 0)
+
 
 class Graph:
     def __init__(self):

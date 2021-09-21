@@ -14,13 +14,13 @@ class MainView(View):
             return render(request, "main.html")
 
         rows_json = json.loads(request.GET.get("row_json"))
-        cleaned_rows_json = self.clean_json_graph(rows_json, request)
+        cleaned_rows_json = self.clean_json_graph(rows_json)
         if not cleaned_rows_json[0]:  # cleaned rows [0] says if op was successful
             return JsonResponse({"err_mes": cleaned_rows_json[1]}, status=400)
         build_graph_from_json(cleaned_rows_json[1])
         return render(request, "results.html")
 
-    def clean_json_graph(self, rows_json, request):
+    def clean_json_graph(self, rows_json):
         for row in rows_json.get("rows"):
             try:
                 predecessors = self.csv_to_list(row, "Vorgänger")

@@ -9,8 +9,7 @@ $("#start_calculation_button").click(function () {
             console.log("SUCCESS");
         },
         error: function (xhr) {
-            var err = JSON.parse(xhr.responseText);
-            alert(err.data);
+            alert(JSON.parse(xhr.responseText).err_mes)
         }
     })
 })
