@@ -6,38 +6,34 @@
         <table id="process_input_table" class="table">
             <thead>
             <tr>
-                <th scope="col" style="width: 5%" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Die ID des Prozesses">#</th>
-                <th scope="col" style="width: 15%" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Wie heißt der Prozess?">Name</th>
-                <th scope="col" style="width: 10%" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Wie lange dauert der Prozess?">Dauer</th>
-                <th scope="col" style="width: 20%" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Welche Prozesse müssen vor diesem Abgeschlossen sein? (z.B. 1, 4, 5)">Vorgänger</th>
-                <th scope="col" style="width: 20%" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mindestabstand von Ende i bis Anfang j. (z.B. 3.5, , 4.34)">Mindestabstand</th>
-                <th scope="col" style="width: 20%" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Maximalabstand von Ende i bis Anfang j. (z.B. , 2, 4.34)">Maximalabstand</th>
+                <th scope="col" style="width: 5%" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    title="Die ID des Prozesses">#
+                </th>
+                <th scope="col" style="width: 15%" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    title="Wie heißt der Prozess?">Name
+                </th>
+                <th scope="col" style="width: 10%" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    title="Wie lange dauert der Prozess?">Dauer
+                </th>
+                <th scope="col" style="width: 20%" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    title="Welche Prozesse müssen vor diesem Abgeschlossen sein? (z.B. 1, 4, 5)">Vorgänger
+                </th>
+                <th scope="col" style="width: 20%" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    title="Mindestabstand von Ende i bis Anfang j. (z.B. 3.5, , 4.34)">Mindestabstand
+                </th>
+                <th scope="col" style="width: 20%" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    title="Maximalabstand von Ende i bis Anfang j. (z.B. , 2, 4.34)">Maximalabstand
+                </th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <td>1</td>
-                <td contenteditable="true">Test</td>
-                <td contenteditable="true">2</td>
                 <td contenteditable="true"></td>
                 <td contenteditable="true"></td>
                 <td contenteditable="true"></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td contenteditable="true">Test3</td>
-                <td contenteditable="true">2</td>
-                <td contenteditable="true">1</td>
-                <td contenteditable="true">3</td>
-                <td contenteditable="true">4</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td contenteditable="true">Test6</td>
-                <td contenteditable="true">2.3</td>
-                <td contenteditable="true">1,2</td>
-                <td contenteditable="true">-,2</td>
-                <td contenteditable="true">1,-</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
             </tr>
             </tbody>
         </table>
@@ -46,12 +42,23 @@
         </button>
     </div>
 
-    <button id="start_calculation_button" type="button" class="btn btn-dark bg-darkdark w-100 lightlight">
-        Berechnung beginnen
-    </button>
+    <div class="row">
+        <div class="col">
+            <button id="start_calculation_button" type="button" class="btn btn-dark bg-darkdark w-100 lightlight">
+                Berechnung beginnen
+            </button>
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-dark bg-darkdark w-100 lightlight" onclick="load_example()">
+                Beispiel laden
+            </button>
+        </div>
+    </div>
+
 
     <div id="results"></div>
 
     <script src={% static "add_table_row.js" %}></script>
     <script src={% static "start_calculation.js" %}></script>
+    <script src={% static "load_example.js" %}></script>
 {% endblock %}
