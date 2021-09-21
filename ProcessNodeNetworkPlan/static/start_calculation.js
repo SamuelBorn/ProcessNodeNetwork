@@ -6,10 +6,12 @@ $("#start_calculation_button").click(function () {
             row_json: JSON.stringify(table_to_json())
         },
         success: function (response) {
-            console.log("SUCCESS");
+            $("#ajax_alerts").hide()
         },
         error: function (xhr) {
-            alert(JSON.parse(xhr.responseText).err_mes)
+            let content_div = $("#ajax_alerts")
+            content_div.html("<div class=\"alert alert-danger mt-4\" role=\"alert\">Fehler: "+JSON.parse(xhr.responseText).err_mes+"</div>")
+            content_div.show()
         }
     })
 })
