@@ -32,6 +32,10 @@
     background: var(--lightlight);
 }
 
+.bg-lightdark {
+    background: #616a7c;
+}
+
 .bg-white {
     background: white;
 }

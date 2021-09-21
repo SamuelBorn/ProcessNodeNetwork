@@ -6,8 +6,12 @@ from ProcessNodeNetworkPlan.logic.Process import Process
 
 def build_graph_from_json(json):
     g = Graph()
+
+    # add all processes
     for row in json.get("rows"):
         g.add_process(row.get("#"), row.get("Dauer"))
+
+    # add all edges
     for row in json.get("rows"):
         for predecessor, min_constraint, max_constraint in zip(row.get("Vorgänger"), row.get("Mindestabstand"),
                                                                row.get("Maximalabstand")):
@@ -19,14 +23,19 @@ def build_graph_from_json(json):
                 if max_constraint is not None:
                     g.add_max_edge(predecessor, row.get("#"), max_constraint)
 
-    print(g)
-    print(len(g.edges))
-
+    # add pseudo end if multiple processes could be the last one
+    if len(g.get_end_processes()) > 1:
+        g.add_process(g.get_processes_count()+1, 0)
+        for end_process in g.get_end_processes():
+            g.add_min_edge(end_process, g.get_processes_count(), 0)
 
 class Graph:
     def __init__(self):
         self.processes = []
         self.edges = []
+
+    def get_processes_count(self):
+        return len(self.processes)
 
     def get_pids(self):
         return [process.pid for process in self.processes]
@@ -57,8 +66,35 @@ class Graph:
     def get_start_processes(self):
         start_processes = []
         for process in self.processes:
-            if process in []:
-                pass
+            if len(self.get_immediate_predecessors(process)) == 0:
+                start_processes.append(process)
+        return start_processes
+
+    def get_end_processes(self):
+        # Gets all processes that dont have a predecessor
+        start_processes = []
+        for process in self.processes:
+            if len(self.get_immediate_successor(process)) == 0:
+                start_processes.append(process)
+        return start_processes
+
+    def get_immediate_predecessors(self, process):
+        # VORGÄNGER
+        # gets all immediate predecessors, doesnt check if those predecessors has predecessors themself
+        predecessors = []
+        for edge in self.edges:
+            if process == edge.to_vertex:
+                predecessors.append(edge.from_vertex)
+        return set(predecessors)
+
+    def get_immediate_successor(self, process):
+        # NACHFOLGER
+        # gets all immediate predecessors, doesnt check if those predecessors has predecessors themself
+        successors = []
+        for edge in self.edges:
+            if process == edge.from_vertex:
+                successors.append(edge.to_vertex)
+        return set(successors)
 
     def __str__(self):
         return f"Prozesse: {self.processes}\nKanten: {self.edges}"
