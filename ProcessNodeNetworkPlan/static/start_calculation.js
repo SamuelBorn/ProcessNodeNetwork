@@ -6,10 +6,11 @@ $("#start_calculation_button").click(function () {
             row_json: JSON.stringify(table_to_json())
         },
         success: function (response) {
-            console.log(response.data);
+            console.log("SUCCESS");
         },
-        error: function (response) {
-            alert("Fehler in den Eingabedaten");
+        error: function (xhr) {
+            var err = JSON.parse(xhr.responseText);
+            alert(err.data);
         }
     })
 })

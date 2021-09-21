@@ -6,24 +6,14 @@
         <table id="process_input_table" class="table">
             <thead>
             <tr>
-                <th scope="col" style="width: 5%" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                    title="Die ID des Prozesses">#
-                </th>
-                <th scope="col" style="width: 15%" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                    title="Wie heißt der Prozess?">Name
-                </th>
-                <th scope="col" style="width: 10%" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                    title="Wie lange dauert der Prozess?">Dauer
-                </th>
-                <th scope="col" style="width: 20%" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                    title="Welche Prozesse müssen vor diesem Abgeschlossen sein? (z.B. 1, 4, 5)">Vorgänger
-                </th>
-                <th scope="col" style="width: 20%" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                    title="Mindestabstand von Ende i bis Anfang j. (z.B. 3.5, , 4.34)">Mindestabstand
-                </th>
-                <th scope="col" style="width: 20%" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                    title="Maximalabstand von Ende i bis Anfang j. (z.B. , 2, 4.34)">Maximalabstand
-                </th>
+                {#                @formatter:off#}
+                <th scope="col" style="width: 5%" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Die ID des Prozesses">#</th>
+                <th scope="col" style="width: 15%" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Wie heißt der Prozess?">Name</th>
+                <th scope="col" style="width: 10%" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Wie lange dauert der Prozess?">Dauer</th>
+                <th scope="col" style="width: 20%" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Welche Prozesse müssen vor diesem Abgeschlossen sein? (z.B. 1, 4, 5)">Vorgänger</th>
+                <th scope="col" style="width: 20%" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mindestabstand von Ende i bis Anfang j. (z.B. 3.5, , 4.34)">Mindestabstand</th>
+                <th scope="col" style="width: 20%" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Maximalabstand von Ende i bis Anfang j. (z.B. , 2, 4.34)">Maximalabstand</th>
+                {#                @formatter:on#}
             </tr>
             </thead>
             <tbody>
@@ -37,7 +27,7 @@
             </tr>
             </tbody>
         </table>
-        <button type="button" class="btn bg-white w-100 darkdark" onclick="add_table_row()">
+        <button type="button" class="btn btn-sm bg-white w-100 dark" onclick="add_table_row()">
             Weiteren Prozess hinzufügen
         </button>
     </div>
@@ -48,7 +38,7 @@
                 Berechnung beginnen
             </button>
         </div>
-        <div class="col-auto">
+        <div class="d-grid gap-2 col-3 mx-auto col-auto">
             <button type="button" class="btn btn-dark bg-darkdark w-100 lightlight" onclick="load_example()">
                 Beispiel laden
             </button>
