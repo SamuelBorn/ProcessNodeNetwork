@@ -39,3 +39,7 @@ At the end you get the calculated results for FAZ, FEZ, SEZ, SAZ. (more detailed
 
 The algorithms of chapter 4, slides 29 and 30 were implemented in the script which can be found in extracts (for easy reference) in this repo.
 The implementation can be found under ./ProcessNetworkPlan/logic/ComputeMinMaxTime.py
+
+Special cases such as multiple potential start and end nodes were also considered.
+There is also an algorithm that intercepts positive circles of a graph.
+Most of the input errors in the table have a very meaningful error message which is communicated to the user.
