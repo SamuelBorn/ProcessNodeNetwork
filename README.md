@@ -1,7 +1,7 @@
 # ProcessNodeNetwork
 
 This tool is an add-on for my stipendium from the Nassau Central Studies Fund. I developed it in the course of the Operations Research lecture. 
-The tool uses the django framework. Most of the logic is implemented in python. Frontend calls are handled with JavaScript.
+The tool uses the django framework. Most of the logic is implemented in python. Frontend calls are handled with JavaScript (Ajax).
 
 
 ## Installation (Linux)
@@ -33,9 +33,11 @@ Predecessor 5 has both a minimum distance of 1 and a maximum distance of 3.
 
 At the end you get the calculated results for FAZ, FEZ, SEZ, SAZ. (more detailed explanations in the tooltip of the results)
 
--------------------------------------------------------------
-
-## Nice to know
+## Additional Information
 
 The algorithms of chapter 4, slides 29 and 30 were implemented in the script which can be found in extracts (for easy reference) in this repo.
 The implementation can be found under ./ProcessNetworkPlan/logic/ComputeMinMaxTime.py
+
+Special cases such as multiple potential start and end nodes were also considered.
+There is also an algorithm that intercepts positive circles of a graph.
+Most of the input errors in the table have a very meaningful error message which is communicated to the user.
