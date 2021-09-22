@@ -26,18 +26,19 @@ def build_graph_from_json(json):
                 if max_constraint is not None:
                     g.add_max_edge(predecessor, row.get("#"), max_constraint)
 
-    # add pseudo end if multiple processes could be the last one
-    if len(g.get_end_processes()) > 1:
-        g.add_process(g.get_processes_count() + 1, 0)
-        for end_process in g.get_end_processes():
-            g.add_min_edge(g.get_processes_count(), end_process, 0)
+    starts = g.get_start_processes()
+    ends = g.get_end_processes()
 
-    # add pseudo start if multiple processes could be the first one
-    if len(g.get_start_processes()) > 1:
-        # is lowest id
+    if len(starts) > 1:
         g.add_process(0, 0)
-        for start_process in g.get_start_processes():
-            g.add_min_edge(start_process, g.get_processes_count(), 0)
+        for start_process in starts:
+            g.add_min_edge(0, start_process.pid, 0)
+
+    if len(ends) > 1:
+        end_pid = g.get_processes_count()+1
+        g.add_process(end_pid, 0)
+        for end_process in ends:
+            g.add_min_edge(end_process.pid, end_pid, 0)
 
     return g
 
