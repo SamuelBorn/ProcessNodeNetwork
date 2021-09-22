@@ -1,7 +1,7 @@
 # ProcessNodeNetwork
 
 This tool is an add-on for my stipendium from the Nassau Central Studies Fund. I developed it in the course of the Operations Research lecture. 
-The tool uses the django framework. Most of the logic is implemented in python. Frontend calls are handled with JavaScript.
+The tool uses the django framework. Most of the logic is implemented in python. Frontend calls are handled with JavaScript (Ajax).
 
 
 ## Installation (Linux)
