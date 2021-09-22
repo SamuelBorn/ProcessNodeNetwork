@@ -33,8 +33,6 @@ Predecessor 5 has both a minimum distance of 1 and a maximum distance of 3.
 
 At the end you get the calculated results for FAZ, FEZ, SEZ, SAZ. (more detailed explanations in the tooltip of the results)
 
--------------------------------------------------------------
-
 ## Nice to know
 
 The algorithms of chapter 4, slides 29 and 30 were implemented in the script which can be found in extracts (for easy reference) in this repo.
