@@ -35,7 +35,7 @@ def build_graph_from_json(json):
             g.add_min_edge(0, start_process.pid, 0)
 
     if len(ends) > 1:
-        end_pid = g.get_processes_count()+1
+        end_pid = max(g.get_pids())+1
         g.add_process(end_pid, 0)
         for end_process in ends:
             g.add_min_edge(end_process.pid, end_pid, 0)

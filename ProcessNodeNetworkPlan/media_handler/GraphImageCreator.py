@@ -2,19 +2,25 @@ import base64
 
 import networkx as nx
 import pylab
+import os
 
 from ProcessNodeNetworkPlan.logic.Graph import Graph
 
 
 def get_image_base64(my_graph):
     create_image(my_graph)
+    image_data = None
     with open("ProcessNodeNetworkPlan/media_handler/Graph.png", "rb") as image:
         image_data = base64.b64encode(image.read()).decode('utf-8')
-        return image_data
+
+    os.remove("ProcessNodeNetworkPlan/media_handler/Graph.png")
+    return image_data
 
 
 def create_image(my_graph: Graph):
     nx_graph = nx.DiGraph()
+
+    print(my_graph.get_processes())
 
     for edge in my_graph.get_edges():
         from_name = f"{edge.from_vertex.pid} ({edge.from_vertex.duration})"

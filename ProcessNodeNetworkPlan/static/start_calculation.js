@@ -19,8 +19,8 @@ $("#start_calculation_button").click(function () {
 
 function table_to_json() {
     var rows = [];
-    var $headers = $("th");
-    var $rows = $("tbody tr").each(function (index) {
+    var $headers = $("#process_input_table th");
+    var $rows = $("#process_input_table tbody tr").each(function (index) {
         $cells = $(this).find("td");
         rows[index] = {};
         $cells.each(function (cellIndex) {

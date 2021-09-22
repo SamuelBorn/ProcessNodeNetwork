@@ -27,8 +27,8 @@ class MainView(View):
         if graph.has_positive_cycle():
             return JsonResponse({"err_mes": "Graph contains positive cycle"}, status=400)
         computer = ComputeMinMaxTime(graph)
-        GraphImageCreator.create_image(graph)
-        context = {"results": computer.compute_sxz_and_fxz(), "image": GraphImageCreator.get_image_base64(graph)}
+        # context = {"results": computer.compute_sxz_and_fxz(), "image": GraphImageCreator.get_image_base64(graph)}
+        context = {"results": computer.compute_sxz_and_fxz()}
         return render(request, "results.html", context)
 
     def check_predecessor_indices(self, cleaned_rows_json):

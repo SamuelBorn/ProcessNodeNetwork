@@ -25,12 +25,14 @@
     </table>
 </div>
 
+{% if image %}
 <div class="content-section">
     <h1 class="mt-2 darkdark"><b>Der Graph der Eingabedaten</b></h1>
     <div class="d-flex justify-content-center">
         <img src="data:image/png;base64,{{ image }}" alt="Generierter Graph" class="w-50">
     </div>
 </div>
+{% endif %}
 
 <script>
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
