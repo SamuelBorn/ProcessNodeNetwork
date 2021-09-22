@@ -5,6 +5,8 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 
+import networkx as nx
+
 from ProcessNodeNetworkPlan.logic.ComputeMinMaxTime import ComputeMinMaxTime
 from ProcessNodeNetworkPlan.logic.Graph import build_graph_from_json
 from ProcessNodeNetworkPlan.media_handler import GraphImageCreator
@@ -22,6 +24,8 @@ class MainView(View):
         if not self.check_predecessor_indices(cleaned_rows_json)[0]:
             return JsonResponse({"err_mes": self.check_predecessor_indices(cleaned_rows_json)[1]}, status=400)
         graph = build_graph_from_json(cleaned_rows_json)
+        if graph.has_positive_cycle():
+            return JsonResponse({"err_mes": "Graph contains positive cycle"}, status=400)
         computer = ComputeMinMaxTime(graph)
         GraphImageCreator.create_image(graph)
         context = {"results": computer.compute_sxz_and_fxz(), "image": GraphImageCreator.get_image_base64(graph)}
@@ -43,7 +47,10 @@ class MainView(View):
                 predecessors = self.csv_to_list(row, "Vorgänger")
                 min_times = self.csv_to_list(row, "Mindestabstand")
                 max_times = self.csv_to_list(row, "Maximalabstand")
-                length = float(row.get("Dauer"))
+                if row.get("Dauer").strip() == "-" or row.get("Dauer").strip() == "":
+                    length = float(0)
+                else:
+                    length = float(row.get("Dauer"))
             except ValueError:
                 return False, f"Fehlerhafte Eingabe einer Zahl in Zeile {row.get('#')}"
 
@@ -70,3 +77,4 @@ class MainView(View):
                     x = int(x)
                 my_list.append(x)
         return my_list
+

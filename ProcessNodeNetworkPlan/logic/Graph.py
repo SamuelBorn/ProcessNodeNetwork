@@ -1,4 +1,7 @@
 from enum import Enum
+from math import inf
+
+import networkx as nx
 
 from ProcessNodeNetworkPlan.logic.Edge import Edge
 from ProcessNodeNetworkPlan.logic.Process import Process
@@ -129,6 +132,33 @@ class Graph:
             if process == edge.from_vertex:
                 successors.append(edge.to_vertex)
         return set(successors)
+
+    def has_positive_cycle(self):
+        dist = [-inf for _ in self.processes]
+        dist[self.vertex_to_index(self.get_start_process())] = 0
+
+        for _ in range(len(self.processes)):
+            for edge in self.edges:
+                u = self.vertex_to_index(edge.from_vertex)
+                v = self.vertex_to_index(edge.to_vertex)
+                w = edge.time_constraint
+                if dist[u] + w > dist[v]:
+                    dist[v] = dist[u] + w
+
+        for edge in self.edges:
+            u = self.vertex_to_index(edge.from_vertex)
+            v = self.vertex_to_index(edge.to_vertex)
+            w = edge.time_constraint
+            if dist[u] + w > dist[v]:
+                return True
+
+        return False
+
+    def vertex_to_index(self, vertex):
+        for i in range(len(self.processes)):
+            if self.processes[i] == vertex:
+                return i
+        raise Exception(f"VERTEX {vertex} NOT IN GRAPH")
 
     def __str__(self):
         return f"Prozesse: {self.processes}\nKanten: {self.edges}"
